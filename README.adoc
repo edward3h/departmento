@@ -1,0 +1,7 @@
+# Departmento
+
+_Work in progress_
+
+Development refs:
+
+* https://www.michaelehead.com/2018/03/10/how-to-create-a-bookmarklet.html

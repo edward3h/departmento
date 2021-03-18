@@ -1,0 +1,26 @@
+{
+  "name": "departmento",
+  "version": "1.0.0",
+  "description": "Bookmarklet to help with Administratum",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "mkdir -p dist && bookmarklet src/index.js dist/bookmarklet.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edward3h/departmento.git"
+  },
+  "author": "Edward",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/edward3h/departmento/issues"
+  },
+  "homepage": "https://github.com/edward3h/departmento#readme",
+  "devDependencies": {
+    "bookmarklet": "^1.0.4"
+  }
+}
