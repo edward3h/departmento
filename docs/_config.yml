@@ -11,4 +11,5 @@ webrick:
   headers:
     Access-Control-Allow-Origin: "*"
 
+url: "https://edward3h.github.io"
 baseurl: "/departmento"
