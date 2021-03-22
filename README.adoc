@@ -1,6 +1,8 @@
 # Departmento
 
-_Work in progress_
+To _use_ the bookmarklet, visit https://edward3h.github.io/departmento/
+
+The rest of this README relates to development.
 
 Development refs:
 
