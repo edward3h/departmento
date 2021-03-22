@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "build": "mkdir -p dist && mkdir -p docs/assets/js && mkdir -p docs/_includes && bookmarklet src/index.js dist/bookmarklet.js && sed -e 's/__site__url__/{{ site.url }}/' < dist/bookmarklet.js > docs/_includes/bookmarklet.js && cp src/*.mjs docs/assets/js/",
+    "build": "mkdir -p dist && mkdir -p docs/assets/js && mkdir -p docs/_includes && bookmarklet src/index.js dist/bookmarklet.js && sed -e 's#__site__url__#{{ site.url }}/departmento#' < dist/bookmarklet.js > docs/_includes/bookmarklet.js && cp src/*.mjs docs/assets/js/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

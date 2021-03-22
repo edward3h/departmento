@@ -10,3 +10,5 @@ defaults:
 webrick:
   headers:
     Access-Control-Allow-Origin: "*"
+
+baseurl: "/departmento"
