@@ -114,3 +114,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+docs/cert.pem
+docs/key.pem
+
+# jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+docs/_includes/bookmarklet.js
+docs/assets/js/main.mjs

@@ -1,0 +1,12 @@
+theme: jekyll-theme-midnight
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# CORS in dev mode
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"

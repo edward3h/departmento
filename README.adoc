@@ -5,3 +5,4 @@ _Work in progress_
 Development refs:
 
 * https://www.michaelehead.com/2018/03/10/how-to-create-a-bookmarklet.html
+* https://diamantidis.github.io/tips/2020/06/26/serve-localhost-website-on-https-with-mkcert
