@@ -38,3 +38,6 @@ the page.
 Using the bookmarklet pulls code from this project into your logged in context on
 Administratum. However, the code from this project is public on Github, so you
 can always check what it is doing.
+
+Departmento may use browser local storage to record your selections or data between
+pages. It does not save data externally.

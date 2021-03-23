@@ -4,7 +4,29 @@ To _use_ the bookmarklet, visit https://edward3h.github.io/departmento/
 
 The rest of this README relates to development.
 
-Development refs:
+## Development
+
+### External Dependencies
+
+I've been developing on a Mac. I haven't checked dependencies for other systems.
+
+* homebrew, rbenv, Ruby and Jekyll. https://jekyllrb.com/docs/installation/macos/#rbenv[Follow instructions here.]
+* mkcert, used for creating certificates for the local development server.
+** `brew install mkcert && mkcert -install`
+
+### Setup
+
+* Clone repo. `git clone https://github.com/edward3h/departmento.git && cd departmento`
+* `npm install`
+* Make certificates for the development server - `cd docs && mkcert -key-file key.pem -cert-file cert.pem localhost`
+
+### Run dev
+
+* Run the build - `npm run build`
+* Start the development server `cd docs && bundle exec jekyll serve --ssl-cert ./cert.pem --ssl-key ./key.pem`
+* Open browser to https://localhost:4000/departmento/
+
+### Miscellaneous References
 
 * https://www.michaelehead.com/2018/03/10/how-to-create-a-bookmarklet.html
 * https://diamantidis.github.io/tips/2020/06/26/serve-localhost-website-on-https-with-mkcert
