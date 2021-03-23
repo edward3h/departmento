@@ -1,0 +1,17 @@
+name: Check formatting
+
+on:
+  push
+
+jobs:
+  prettier:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: prepare node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: npx prettier --check .

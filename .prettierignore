@@ -1,0 +1,12 @@
+# Ignore artifacts:
+build
+coverage
+dist
+
+# jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+docs/_includes/bookmarklet.js
+docs/assets/js/main.mjs

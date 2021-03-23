@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "main"
-    
+
 jobs:
   jekyll:
     runs-on: ubuntu-20.04
@@ -26,4 +26,4 @@ jobs:
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          jekyll_src: 'docs'
+          jekyll_src: "docs"
