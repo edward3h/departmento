@@ -1,4 +1,4 @@
-import $ from './jquery-module.mjs';
+import $ from "./jquery-module.mjs";
 
 const LOADED = "departmento_loaded";
 const UNCHECKED = "❏";
@@ -6,11 +6,11 @@ const CHECKED = "☑";
 const MUTATION_TIMEOUT = 500;
 
 const _applyOnce = () => {
-    if ($(`#${LOADED}`).length) {
-        return;
-    }
+  if ($(`#${LOADED}`).length) {
+    return;
+  }
 
-    $("head").append(`<style>
+  $("head").append(`<style>
     .departmento {
         background-color: black;
         color: #CCC;
@@ -27,14 +27,13 @@ const _applyOnce = () => {
     }
     </style>`);
 
-    let loaded = document.createElement("div");
-    loaded.id = LOADED;
-    loaded.style.display = "none";
-    document.body.appendChild(loaded);
+  let loaded = document.createElement("div");
+  loaded.id = LOADED;
+  loaded.style.display = "none";
+  document.body.appendChild(loaded);
 };
 
 const _container = () => {
-
   let container = document.querySelector("#departmento_root");
 
   if (container) {
@@ -57,7 +56,7 @@ const _container = () => {
 };
 
 const _printView = () => {
-    _container();
+  _container();
 
   $("div.form-check")
     .not(":contains('Battle Sheet')")
@@ -134,26 +133,25 @@ const _printView = () => {
 };
 
 const _apply = () => {
-    const path = window.location.pathname;
-    if (path.startsWith("/forces/print")) {
-        _printView();
-    } else {
-        _container();
-    }
+  const path = window.location.pathname;
+  if (path.startsWith("/forces/print")) {
+    _printView();
+  } else {
+    _container();
+  }
 };
 
-
 (function () {
-    _applyOnce();
+  _applyOnce();
 
-    let timeoutID;
+  let timeoutID;
   const observer = new MutationObserver((mutations, o) => {
-      window.clearTimeout(timeoutID); // safe, fails silently https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearTimeout#notes
-      timeoutID = window.setTimeout(_apply, MUTATION_TIMEOUT);
+    window.clearTimeout(timeoutID); // safe, fails silently https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearTimeout#notes
+    timeoutID = window.setTimeout(_apply, MUTATION_TIMEOUT);
   });
   const app = document.querySelector("app");
   observer.observe(app, { childList: true });
 
   window.departmento = _apply;
-timeoutID = window.setTimeout(_apply,0);
+  timeoutID = window.setTimeout(_apply, 0);
 })();
