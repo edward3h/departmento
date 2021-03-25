@@ -1,0 +1,13 @@
+battle_size:
+  - name: Combat Patrol
+    power: 25
+    cp: 3
+  - name: Incursion
+    power: 50
+    cp: 6
+  - name: Strike Force
+    power: 100
+    cp: 12
+  - name: Onslaught
+    power: 150
+    cp: 18

@@ -25,8 +25,11 @@ I've been developing on a Mac. I haven't checked dependencies for other systems.
 * Run the build - `npm run build`
 * Start the development server `cd docs && bundle exec jekyll serve --ssl-cert ./cert.pem --ssl-key ./key.pem`
 * Open browser to https://localhost:4000/departmento/
+* (Or if you're me: `npm run build && bundle exec jekyll serve --ssl-cert ./cert.pem --ssl-key ./key.pem`)
 
-### Miscellaneous References
+### Miscellaneous References and Notes
 
+* Yes, jQuery is a bit old-hat, but it is helpful for this situation where the work involves
+  modifying an existing page.
 * https://www.michaelehead.com/2018/03/10/how-to-create-a-bookmarklet.html
 * https://diamantidis.github.io/tips/2020/06/26/serve-localhost-website-on-https-with-mkcert

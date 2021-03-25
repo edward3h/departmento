@@ -123,4 +123,4 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 docs/_includes/bookmarklet.js
-docs/assets/js/main.mjs
+docs/assets/js/*

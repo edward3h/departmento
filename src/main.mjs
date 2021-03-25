@@ -1,8 +1,7 @@
 import $ from "./jquery-module.mjs";
+import printView from "./print-view.mjs";
 
 const LOADED = "departmento_loaded";
-const UNCHECKED = "❏";
-const CHECKED = "☑";
 const MUTATION_TIMEOUT = 500;
 
 const _applyOnce = () => {
@@ -55,89 +54,11 @@ const _container = () => {
   navbar.insertBefore(container, navbarDiv);
 };
 
-const _printView = () => {
-  _container();
-
-  $("div.form-check")
-    .not(":contains('Battle Sheet')")
-    .children("input:checked")
-    .each((i, x) => x.click());
-
-  $("div.btn-group").removeClass("mt-5 my-5")
-    .after(`<div class="btn-group departmento d-print-none">
-    <div class="form-check form-check-inline">
-    <input type="checkbox" id="astartes" class="form-check-input" checked><label class="form-check-label" for="astartes">Adeptus Astartes</label>
-    </div>
-    <div class="form-check form-check-inline">
-    <input type="checkbox" id="necrons" class="form-check-input" checked><label class="form-check-label" for="necrons">Necrons</label>
-    </div>    
-    <div class="form-check form-check-inline">
-    <input type="checkbox" id="btv" class="form-check-input" checked><label class="form-check-label" for="btv">BtV</label>
-    </div>
-    </div>`);
-
-  $("div.row div.col-9").replaceWith((a, b) => {
-    let inner = b.replace(
-      new RegExp(`${UNCHECKED}[^,]*,?`, "g"),
-      `<span class="agenda unchecked">$&</span>`
-    );
-    return `<div class="col-9">${inner}</div>`;
-  });
-  $("span.agenda").on("click", function (evt) {
-    let el = $(this);
-    if (el.hasClass("unchecked")) {
-      el.parent().children().removeClass("checked").addClass("unchecked");
-      el.parent()
-        .children()
-        .text((i, t) => t.replace(CHECKED, UNCHECKED));
-      el.removeClass("unchecked").addClass("checked");
-      el.text(el.text().replace(UNCHECKED, CHECKED));
-    } else {
-      el.removeClass("checked").addClass("unchecked");
-      el.text(el.text().replace(CHECKED, UNCHECKED));
-    }
-  });
-
-  $("div.col-3")
-    .filter(":contains('Adeptus Astartes')")
-    .next()
-    .addBack()
-    .addClass("astartes");
-  $("div.col-3")
-    .filter(":contains('Necrons')")
-    .next()
-    .addBack()
-    .addClass("necrons");
-
-  $("#astartes").on("click", function (evt) {
-    if (this.checked) {
-      $(".astartes").show();
-    } else {
-      $(".astartes").hide();
-    }
-  });
-  $("#necrons").on("click", function (evt) {
-    if (this.checked) {
-      $(".necrons").show();
-    } else {
-      $(".necrons").hide();
-    }
-  });
-  $("#btv").on("click", function (evt) {
-    if (this.checked) {
-      $('.agenda:contains("(BtV)")').show();
-    } else {
-      $('.agenda:contains("(BtV)")').hide();
-    }
-  });
-};
-
 const _apply = () => {
+  _container();
   const path = window.location.pathname;
   if (path.startsWith("/forces/print")) {
-    _printView();
-  } else {
-    _container();
+    printView();
   }
 };
 
