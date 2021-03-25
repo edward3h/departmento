@@ -5,6 +5,10 @@ on:
     branches:
       - "main"
 
+defaults:
+  run:
+    shell: bash
+    
 jobs:
   jekyll:
     runs-on: ubuntu-20.04
