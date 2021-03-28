@@ -19,6 +19,28 @@ const SHOW_HIDE_FIELDS = {
   },
 };
 
+let _battleSize;
+
+const _updateAgendaCols = (battleSize) => {
+  let count = 1;
+  if (battleSize) {
+    count = battleSize.agendas || 1;
+  }
+  const selectedAgendas = $(".agenda.checked")
+    .map((i, el) => el.textContent.replace(CHECKED, "").replace(",", "").trim())
+    .get();
+  for (let i = 0; i < 4; i++) {
+    let name =
+      selectedAgendas.length > i ? selectedAgendas[i] : `Agenda ${i + 1}`;
+    $("thead td.agenda" + i).text(name);
+    if (i < count) {
+      $("td.agenda" + i).show();
+    } else {
+      $("td.agenda" + i).hide();
+    }
+  }
+};
+
 const _extract = () => {
   const pointsPerPLS = $("dt")
     .filter(":contains('Points per PL')")
@@ -69,6 +91,7 @@ const _agendaSpans = () => {
       el.removeClass("checked").addClass("unchecked");
       el.text(el.text().replace(CHECKED, UNCHECKED));
     }
+    _updateAgendaCols(_battleSize);
   });
 };
 
@@ -100,7 +123,55 @@ const _showHideFields = () => {
   });
 };
 
-const _printView = () => {
+const _battleSizeSelector = (data) => {
+  let selectedSize = store.load("battle_size") || 1;
+  _battleSize = data.battle_size[selectedSize];
+  let options = data.battle_size
+    .map(
+      (v, i) =>
+        `<option value="${i}" ${i == selectedSize ? "selected" : ""}>${
+          v.name
+        }</option>`
+    )
+    .join();
+  $("div.row div.col")
+    .filter(":contains('Location')")
+    .html(
+      `<label for="battle_size">Battle Size</label><select id="battle_size">${options}</select>`
+    );
+  $("#battle_size").on("change", (evt) => {
+    let sizeIndex = evt.target.value;
+    store.save("battle_size", sizeIndex);
+    _battleSize = data.battle_size[sizeIndex];
+    $("#departmento_root").trigger({
+      type: "departmento_size",
+      value: data.battle_size[sizeIndex],
+    });
+  });
+};
+
+const _rosterColumnMods = () => {
+  $("table").first().find("td span:nth-child(2)").remove();
+  $("table").first().find("td:nth-child(8)").remove();
+  $("table")
+    .first()
+    .find("thead td:nth-child(6)")
+    .replaceWith(
+      `<td class="agenda0"></td><td class="agenda1"></td><td class="agenda2"></td><td class="agenda3"></td>`
+    );
+  $("table")
+    .first()
+    .find("tbody td:nth-child(6)")
+    .replaceWith(
+      `<td class="agenda0">❏❏❏</td><td class="agenda1">❏❏❏</td><td class="agenda2">❏❏❏</td><td class="agenda3">❏❏❏</td>`
+    );
+  _updateAgendaCols(_battleSize);
+  $("#departmento_root").on("departmento_size", (evt) =>
+    _updateAgendaCols(evt.value)
+  );
+};
+
+const _printView = (data) => {
   _extract();
   _hideDetails();
   _agendaSpans();
@@ -110,6 +181,8 @@ const _printView = () => {
       </div>`);
 
   _showHideFields();
+  _battleSizeSelector(data);
+  _rosterColumnMods();
 };
 
 export default _printView;
