@@ -8,7 +8,7 @@ const _key = (key) => {
       path.startsWith("/forces/print/") ||
       path.startsWith("/forces/details/")
     ) {
-      currentForce = path.split("/")[2];
+      currentForce = path.split("/")[3];
     }
   }
   if (!currentForce) {
