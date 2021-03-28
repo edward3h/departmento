@@ -22,10 +22,8 @@ I've been developing on a Mac. I haven't checked dependencies for other systems.
 
 ### Run dev
 
-* Run the build - `npm run build`
-* Start the development server `cd docs && bundle exec jekyll serve --ssl-cert ./cert.pem --ssl-key ./key.pem`
+* Run the dev build - `npm run serve`
 * Open browser to https://localhost:4000/departmento/
-* (Or if you're me: `npm run build && bundle exec jekyll serve --ssl-cert ./cert.pem --ssl-key ./key.pem`)
 
 ### Miscellaneous References and Notes
 

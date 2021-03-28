@@ -3,6 +3,8 @@
 
 # Departmento
 
+<sub>Build: {{site.data.build.version}}</sub>
+
 Departmento is a bookmarklet that works with [Administratum](https://www.administratum.net)
 to add some features.
 
