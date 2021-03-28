@@ -42,13 +42,18 @@ const _updateAgendaCols = (battleSize) => {
 };
 
 const _extract = () => {
-  const pointsPerPLS = $("dt")
-    .filter(":contains('Points per PL')")
-    .next()
-    .text();
-  const pointsPerPL = parseInt(pointsPerPLS, 10);
-  if (!isNaN(pointsPerPL)) {
-    store.save("pointsPerPL", pointsPerPL);
+  const powerSystem = $("dt").filter(':contains("Power System")').next().text();
+  const usePoints = powerSystem.trim() == "Points";
+  store.save("usePoints", usePoints);
+  if (usePoints) {
+    const pointsPerPLS = $("dt")
+      .filter(":contains('Points per PL')")
+      .next()
+      .text();
+    const pointsPerPL = parseInt(pointsPerPLS, 10);
+    if (!isNaN(pointsPerPL)) {
+      store.save("pointsPerPL", pointsPerPL);
+    }
   }
 
   const opponents = [];
@@ -123,6 +128,32 @@ const _showHideFields = () => {
   });
 };
 
+const _pointsField = () => {
+  const usePoints = store.load("usePoints");
+  let points =
+    store.load("points") ||
+    (usePoints
+      ? _battleSize.power * store.load("pointsPerPL")
+      : _battleSize.power);
+  $("div.row div.col")
+    .filter(":contains('Power Level')")
+    .html(
+      `<label for="points">${
+        usePoints ? "Points" : "Power"
+      }</label><input type="number" id="points" value="${points}">`
+    );
+  $("#points").on("change", (evt) => store.save("points", evt.target.value));
+  $("#departmento_root").on("departmento_size", (evt) =>
+    $("#points")
+      .val(
+        usePoints
+          ? evt.value.power * store.load("pointsPerPL")
+          : evt.value.power
+      )
+      .trigger("change")
+  );
+};
+
 const _battleSizeSelector = (data) => {
   let selectedSize = store.load("battle_size") || 1;
   _battleSize = data.battle_size[selectedSize];
@@ -182,6 +213,7 @@ const _printView = (data) => {
 
   _showHideFields();
   _battleSizeSelector(data);
+  _pointsField();
   _rosterColumnMods();
 };
 
