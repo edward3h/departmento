@@ -11,10 +11,11 @@ webrick:
   headers:
     Access-Control-Allow-Origin: "*"
 
+title: Departmento
 url: "https://edward3h.github.io"
 baseurl: "/departmento"
 
-repository: departmento/edward3h.github.io
+repository: edward3h.github.io/departmento
 
 plugins:
   - "jekyll-github-metadata"

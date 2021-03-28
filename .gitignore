@@ -124,3 +124,4 @@ _site/
 .jekyll-metadata
 docs/_includes/bookmarklet.js
 docs/assets/js/*
+docs/_data/build.yml

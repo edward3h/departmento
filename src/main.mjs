@@ -1,5 +1,6 @@
 import $ from "./jquery-module.mjs";
 import printView from "./print-view.mjs";
+import getData from "./get-data.mjs";
 
 const LOADED = "departmento_loaded";
 const MUTATION_TIMEOUT = 500;
@@ -32,7 +33,7 @@ const _applyOnce = () => {
   document.body.appendChild(loaded);
 };
 
-const _container = () => {
+const _container = (data) => {
   let container = document.querySelector("#departmento_root");
 
   if (container) {
@@ -46,7 +47,7 @@ const _container = () => {
   container.style.padding = "0.3125rem";
   container.style.backgroundColor = "black";
   container.style.color = "#BBB";
-  container.innerHTML = "+ D e p a r t m e n t o";
+  container.innerHTML = `+ D e p a r t m e n t o <sub>Build: ${data.version}</sub>`;
 
   const navbar = document.querySelector(".navbar");
   const navbarDiv = document.querySelector(".navbar div");
@@ -54,13 +55,15 @@ const _container = () => {
   navbar.insertBefore(container, navbarDiv);
 };
 
-const _apply = () => {
-  _container();
+async function _apply() {
+  let data = await getData();
+  console.log("data: ", data);
+  _container(data);
   const path = window.location.pathname;
   if (path.startsWith("/forces/print")) {
-    printView();
+    printView(data);
   }
-};
+}
 
 (function () {
   _applyOnce();
