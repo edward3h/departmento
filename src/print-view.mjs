@@ -17,6 +17,10 @@ const SHOW_HIDE_FIELDS = {
     display: "BtV",
     hideFilter: '.agenda:contains("(BtV)")',
   },
+  deselected: {
+    display: "Unselected Units",
+    hideFilter: "tbody tr:not(.selected)",
+  },
 };
 
 let _battleSize;
@@ -66,6 +70,22 @@ const _extract = () => {
       }
     });
   store.save("opponents", opponents);
+
+  const units = {};
+  $("dl.row dt")
+    .filter(":contains('Datasheet Source')")
+    .each(function () {
+      const source = $(this).next().text().trim();
+      const role = $(this).nextAll(":contains('Role')").next().text().trim();
+      const name = $(this)
+        .parents("div.row")
+        .prev("div.row")
+        .find("h3")
+        .text()
+        .trim();
+      units[name] = { name, role, source };
+    });
+  store.save("units", units);
 };
 
 const _hideDetails = () => {
@@ -202,6 +222,43 @@ const _rosterColumnMods = () => {
   );
 };
 
+const _sum = (acc, cur) => acc + cur;
+const _recomputePoints = () => {
+  const total = $("tbody tr.selected td:nth-child(3)")
+    .map(function () {
+      return parseInt(this.textContent, 10);
+    })
+    .get()
+    .reduce(_sum, 0);
+  $("#pointsSelected").text(total);
+};
+
+const _armySelection = () => {
+  $("#departmento_root").after(`<div class="departmento d-print-none">
+  <dl class="row">
+  <dt class="col-sm-4">Army Selection</dt>
+  <dd class="col-sm-8" id="pointsSelected"></dd>
+  </dl>`);
+  $("tbody td:first-child")
+    .filter(":contains('❏')")
+    .next()
+    .addBack()
+    .addClass("armySelector");
+  $("td.armySelector").on("click", (evt) => {
+    const row = $(evt.target).parent();
+    if (row.hasClass("selected")) {
+      row.removeClass("selected");
+      row.next().removeClass("selected");
+      row.find("td:first-child").text(UNCHECKED);
+    } else {
+      row.addClass("selected");
+      row.next().addClass("selected");
+      row.find("td:first-child").text(CHECKED);
+    }
+    _recomputePoints();
+  });
+};
+
 const _printView = (data) => {
   _extract();
   _hideDetails();
@@ -215,6 +272,7 @@ const _printView = (data) => {
   _battleSizeSelector(data);
   _pointsField();
   _rosterColumnMods();
+  _armySelection();
 };
 
 export default _printView;

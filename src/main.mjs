@@ -15,7 +15,7 @@ const _applyOnce = () => {
         background-color: black;
         color: #CCC;
     }
-    .agenda {
+    .agenda, .armySelector {
         cursor: pointer;
     }
     .agenda.checked {
@@ -57,7 +57,6 @@ const _container = (data) => {
 
 async function _apply() {
   let data = await getData();
-  console.log("data: ", data);
   _container(data);
   const path = window.location.pathname;
   if (path.startsWith("/forces/print")) {

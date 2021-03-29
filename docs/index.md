@@ -27,12 +27,14 @@ the page.
 - Auto-hide everything except Battle Sheet.
 - Show/Hide faction specific agendas.
 - Show/Hide Beyond the Veil specific agendas.
-- Agenda selection logic.
+- Agenda selection logic, agenda columns in roster sheet.
+- Army selection, simple points calculation.
 
 ### TODO
 
-- Agenda tracking columns in the roster.
-- Army selection helper.
+- Show selected roles to help with detachment building.
+- Improve styling.
+- Track battle in browser, apply when you build battle report.
 - _Any other suggestions?_
 
 ## Disclaimer
@@ -43,3 +45,8 @@ can always check what it is doing.
 
 Departmento may use browser local storage to record your selections or data between
 pages. It does not save data externally.
+
+## Compatibility
+
+I tested with Chrome on my Mac. In theory I used features available in other
+modern web browsers...
