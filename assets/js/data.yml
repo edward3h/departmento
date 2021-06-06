@@ -1,0 +1,18 @@
+battle_size:
+  - name: Combat Patrol
+    power: 25
+    cp: 3
+    agendas: 1
+  - name: Incursion
+    power: 50
+    cp: 6
+    agendas: 2
+  - name: Strike Force
+    power: 100
+    cp: 12
+    agendas: 3
+  - name: Onslaught
+    power: 150
+    cp: 18
+    agendas: 4
+version: "0430021.M2"
