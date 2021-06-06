@@ -19,7 +19,7 @@ const SHOW_HIDE_FIELDS = {
   },
   deselected: {
     display: "Unselected Units",
-    hideFilter: "tbody tr:not(.selected)",
+    hideFilter: ".roster tbody tr:not(.selected)",
   },
 };
 
@@ -202,6 +202,7 @@ const _battleSizeSelector = (data) => {
 };
 
 const _rosterColumnMods = () => {
+  $("table").first().addClass("roster");
   $("table").first().find("td span:nth-child(2)").remove();
   $("table").first().find("td:nth-child(8)").remove();
   $("table")
